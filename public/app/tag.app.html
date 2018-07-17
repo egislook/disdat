@@ -1,6 +1,6 @@
 <tag-app>
   
-  <def-wrap class="mnh:100vh dp:flx ai:c">
+  <def-wrap class="mnh:100vh dp:flx ai:c ts:all {'blr:3px': !CLIENT}">
     <div each={result, index in results} if={index < show} class="ta:l m:20px m-t:40px">
       <div class="p:20px-40px">
         <a id={index + 1} href="#{index + 1}">
@@ -13,17 +13,23 @@
         <def-raw html={result.Content} />
       </div>
     </div>
-    <div class="ps:fx b:0 ta:c w:100pc l:0">
+    <div class="ps:fx b:0 ta:c w:100pc l:0" if={amount > 0}>
       <def-button onclick={loadMore} text="show more ({amount})" big={true} />
     </div>
   </def-wrap>
+  
+  <def-fog if={ !CLIENT } 
+    loading={ true } 
+    fixed={ true } />
 
   <script>
+    if(typeof riothing !== 'undefined')
+      this.CLIENT = true;
   
     this.results = this.opts.state.results;
     this.step   = 30;
     this.show   = 10;
-    this.amount = this.results.length;
+    this.amount = this.results.length - this.show;
     
     this.loadMore = () => this.update({ show: (this.show + this.step), amount: (this.amount - this.step) });
     
