@@ -1,0 +1,31 @@
+<tag-app>
+  
+  <def-wrap class="mnh:100vh dp:flx ai:c">
+    <div each={result, index in results} if={index < show} class="ta:l m:20px m-t:40px">
+      <div class="p:20px-40px">
+        <a id={index + 1} href="#{index + 1}">
+          <h1 class="fw:100 fs:250pc"><strong>#{index+1}</strong> {result.Titel.substring(0, 50)}...</h1>
+        </a>
+        <p class="fw:400">{result.Company}</p>
+        <a class="fs:90pc c:sec fw:400" target="_blank" href={result.Url}>{result.Url}</a>
+      </div>
+      <div class="p:40px bg:white bs:1 m-t:10px ps:rl">
+        <def-raw html={result.Content} />
+      </div>
+    </div>
+    <div class="ps:fx b:0 ta:c w:100pc l:0">
+      <def-button onclick={loadMore} text="show more ({amount})" big={true} />
+    </div>
+  </def-wrap>
+
+  <script>
+  
+    this.results = this.opts.state.results;
+    this.step   = 30;
+    this.show   = 10;
+    this.amount = this.results.length;
+    
+    this.loadMore = () => this.update({ show: (this.show + this.step), amount: (this.amount - this.step) });
+    
+  </script>
+</tag-app>

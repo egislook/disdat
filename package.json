@@ -1,0 +1,21 @@
+{
+  "name": "disdat",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "helloWorld": "echo 'hello world;'",
+    "start": "node index.js",
+    "watch": "export NODE_ENV=development|| set NODE_ENV=development&& nodemon -e html,js,json --watch ../../_packs --watch ./ index.js",
+    "prod": "nodemon -e html,js --watch ./ index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "export NODE_ENV=development|| set NODE_ENV=development&& nodemon -e html,js index.js"
+  },
+  "author": "egislook",
+  "license": "ISC",
+  "dependencies": {
+    "riothing": "^0.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.7"
+  }
+}
