@@ -1,0 +1,33 @@
+<page-article>
+  
+  <div class="ta:l m:20px m-t:100px">
+      
+    <div class="p:20px-40px">
+      <a id={index + 1} href="#{index + 1}">
+        <h1 class="fw:100 fs:250pc"><strong>#{index+1}</strong> {result.Titel}</h1>
+      </a>
+      <p class="fw:400">{result.Company}</p>
+      <a class="fs:90pc c:sec fw:400" target="_blank" href={result.Url}>{result.Url}</a>
+      <p class="fs:80pc fw:400 m:5px-0">{utils.ago(result.Postdate.split('.').reverse().join('/'))}</p>
+    </div>
+    <div class="p:40px bg:white br:5px bs:2 m-t:10px ps:rl c:txt">
+      <def-raw unlimited={true} html={result.Content} />
+    </div>
+    
+  </div>
+
+  <script>
+    
+    this.url = this.opts.state.query.url;
+    
+    this.result = this.opts.state.results.find( (r, i) => {
+      const match = r.Url === this.url;
+      if(!match) return;
+      
+      this.index = i;
+      return match;
+    });
+    
+    
+  </script>
+</page-article>

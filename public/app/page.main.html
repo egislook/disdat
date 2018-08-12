@@ -1,6 +1,42 @@
 <page-main>
-  <div>hello</div>
+  
+  <div class="ta:l m:20px m-t:60px">
+    
+    <div 
+      each={result, index in results} 
+      if={index < show}
+      class="m-t:40px">
+        
+        <div class="p:20px-40px op:0.8 ps:rl dp:flx jc:sb hv-scl:1.03_bg:white br:10px hv-op:1 ts:all">
+          <div>
+             <a id={index + 1} href={'/?splash=article&url=' + result.Url}>
+              <h1 class="fw:100 fs:250pc"><strong>#{index+1}</strong> {result.Titel.substring(0, 50)}...</h1>
+            </a>
+            <p class="fw:400 p:0-5px">{result.Company}</p>
+            <a class="fs:90pc c:sec fw:400" target="_blank" href={result.Url}>{result.Url}</a>
+            <p class="fs:80pc fw:400 m:5px-0">{utils.ago(result.Postdate.split('.').reverse().join('/'))}</p>
+          </div>
+          <div>
+            <img class="w:50px op:0.7 bs:2 p:1px br:5px m-t:10px gs:0.5" src={result.Logo} />
+          </div>
+        </div>
+        
+    
+    </div>
+    
+    <div class="ps:fx b:0 ta:c w:100pc l:0" if={amount > 0}>
+      <def-button dark={true} classname="bg:white-!" onclick={loadMore} text="show more ({amount})" />
+    </div>
+  </div>
+
   <script>
-    //console.log(this);
+    
+    this.results = this.opts.state.results;
+    this.step   = 30;
+    this.show   = 10;
+    this.amount = this.results.length - this.show;
+    
+    this.loadMore = () => this.update({ show: (this.show + this.step), amount: (this.amount - this.step) });
+    
   </script>
 </page-main>

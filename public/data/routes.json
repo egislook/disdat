@@ -1,0 +1,12 @@
+[
+  {
+    "name": "article",
+    "view": "page-article",
+    "splash": true,
+  },
+  {
+    "route":  "/",
+    "view": "page-main",
+    "plain": true,
+  }
+]
